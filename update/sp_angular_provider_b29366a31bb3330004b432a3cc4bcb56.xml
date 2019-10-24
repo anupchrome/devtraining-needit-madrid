@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_angular_provider">
+    <sp_angular_provider action="INSERT_OR_UPDATE">
+        <name>mmpImageTiles</name>
+        <script><![CDATA[function mmpImageTiles() {
+    var directive = {};
+    directive.restrict = 'E';
+    directive.scope = {
+      imageTilesDetails: '='
+    };
+    directive.template= '<div class="container-fluid">'+
+'    <slick infinite="false" slides-to-show="4" slides-to-scroll="1" responsive="[{breakpoint: 1024,settings:{slidesToShow: 3}},{breakpoint: 768,settings:{slidesToShow: 2}},{breakpoint: 480,settings:{slidesToShow: 1}}]">'+
+'        <div ng-repeat="slide in imageTilesDetails.tiles">'+
+'            <div class="travel-slide" style="background-image: url(\'{{slide.imageURL}}\');">'+
+'                <a href="{{slide.URL}}">'+
+'                    <div class="travel-slide-info">'+
+'                        '+
+'                        <h4>{{slide.name}}</h4>'+
+'                        <span>{{slide.URLText}} <i class="fa fa-caret-right" aria-hidden="true"></i></span>'+
+'                        '+
+'                    </div>'+
+'                </a>'+
+'            </div>'+
+'        </div>'+
+'    </slick>'+
+'    <a href="{{imageTilesDetails.seeAllHref}}" class="image-slider-see-more" ng-show="imageTilesDetails.seeAllEnabled">See More</a>'+
+'</div>';
+    return directive; 
+}]]></script>
+        <sys_class_name>sp_angular_provider</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-09-16 09:38:05</sys_created_on>
+        <sys_id>b29366a31bb3330004b432a3cc4bcb56</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>mmpImageTiles</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sp_angular_provider_b29366a31bb3330004b432a3cc4bcb56</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-09-16 10:10:54</sys_updated_on>
+        <type>directive</type>
+    </sp_angular_provider>
+</record_update>

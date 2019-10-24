@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_angular_provider">
+    <sp_angular_provider action="INSERT_OR_UPDATE">
+        <name>mmpMajorTask</name>
+        <script><![CDATA[function mmpMajorTask()  {  
+    var directive = {};
+    directive.restrict = 'E';
+    directive.scope = {
+        title: '@',
+        shortDescription: '@',
+        action: '='
+    };
+    directive.template= '<div class="text-center major-task-dir-div">'+
+'    <h3>{{title}}</h3>'+
+'    <h4>{{shortDescription}}</h4>'+
+'    <button class="btn {{action.btnClass}}" ng-click="action.clickAction" ng-if="action">{{action.name}}</button>'+
+'</div>';
+    return directive;
+}]]></script>
+        <sys_class_name>sp_angular_provider</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-09-13 12:48:34</sys_created_on>
+        <sys_id>f392f3e21bf3330004b432a3cc4bcbcd</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>mmpMajorTask</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sp_angular_provider_f392f3e21bf3330004b432a3cc4bcbcd</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-09-13 13:36:39</sys_updated_on>
+        <type>directive</type>
+    </sp_angular_provider>
+</record_update>

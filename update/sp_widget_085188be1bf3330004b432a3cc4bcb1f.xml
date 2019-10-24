@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function passport_ImageScroll() {
+
+    var c = this; //declare c internally 
+    c.data = {}; //setup our data object (To be used in later steps)
+
+    //Image Tiles Slider Details Here
+    c.data.imageTilesDetails = {};
+    c.data.imageTilesDetails.title = 'Passport Categories';
+    c.data.imageTilesDetails.seeAllEnabled = true;
+    c.data.imageTilesDetails.seeAllHref = 'https://google.com';
+
+    //Single Image Tiles Details here
+    c.data.imageTilesDetails.tiles = [
+        {name: 'Tips for my move', imageURL:'https://abs.green/files/pics/csm_Heydar-Aliyev-Center-6-cropped_web_v2_efbc456ba1.jpg', URLText: 'Learn More', URL: 'https://google.com'},
+        {name: 'Sample text Here', imageURL:'https://media2.fdncms.com/orlando/imager/u/blog/12336460/hard_rock_daytona.jpg', URLText: 'Read More', URL: 'https://google.com'},
+        {name: 'Holland Windmill', imageURL:'https://www.hollandisc.com/-/media/ISC/HollandV2/Galleries/holland_windmill2_700.jpg', URLText: 'Learn More', URL: 'https://google.com'},
+        {name: 'Enjoy with Family', imageURL:'https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/05/Family-Quotes-1.jpg', URLText: 'Read More', URL: 'https://google.com'},
+        {name: 'Tips for my move', imageURL:'https://abs.green/files/pics/csm_Heydar-Aliyev-Center-6-cropped_web_v2_efbc456ba1.jpg', URLText: 'Learn More', URL: 'https://google.com'},
+        {name: 'Example Text Here', imageURL:'https://media2.fdncms.com/orlando/imager/u/blog/12336460/hard_rock_daytona.jpg', URLText: 'Read More', URL: 'https://google.com'}
+    ];
+
+  }]]></client_script>
+        <controller_as>c</controller_as>
+        <css>&#13;
+&#13;
+/********** Slider **********/&#13;
+&#13;
+.passportslider {&#13;
+	max-width: 95%;&#13;
+	margin: 0 auto 15px;&#13;
+}&#13;
+&#13;
+.travel-slide-info {&#13;
+	position: absolute;&#13;
+	bottom: -5px;&#13;
+	background-color: rgba(255, 255, 255, 0.8);&#13;
+	padding: 0 7px 7px;&#13;
+	text-align: center;&#13;
+	width: 100%;&#13;
+}&#13;
+&#13;
+.travel-slide {&#13;
+	height: 160px;&#13;
+	background-size: cover;&#13;
+	position: relative;&#13;
+	border-radius: 4px;&#13;
+	margin: 0 auto;&#13;
+}&#13;
+&#13;
+.travel-slide-info span {&#13;
+	color: #555;&#13;
+	font-family: 'Montserrat', sans-serif;&#13;
+	font-size: 13px;&#13;
+}&#13;
+&#13;
+.travel-slide-info h4 {&#13;
+	margin: 10px 0 3px;&#13;
+	color: #555;&#13;
+	font-family: 'Montserrat', sans-serif;&#13;
+}&#13;
+&#13;
+.slick-prev:before, .slick-next:before{&#13;
+	color: #000 !important;&#13;
+}&#13;
+&#13;
+image-tiles h3 {&#13;
+    font-weight: bold;&#13;
+}&#13;
+&#13;
+/* the slides */&#13;
+.slick-slide {&#13;
+	margin: 0 10px;&#13;
+}&#13;
+&#13;
+/* the parent */&#13;
+.slick-list {&#13;
+	margin: 0 -10px;&#13;
+}&#13;
+&#13;
+.image-slider-see-more{&#13;
+	display: block;&#13;
+    text-align: right;&#13;
+    color: #424242;&#13;
+    margin-top: -15px;&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>passport_imagescroll</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>passport_ImageScroll</name>
+        <option_schema/>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-09-13 13:55:25</sys_created_on>
+        <sys_id>085188be1bf3330004b432a3cc4bcb1f</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>passport_ImageScroll</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sp_widget_085188be1bf3330004b432a3cc4bcb1f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-09-16 10:16:00</sys_updated_on>
+        <template><![CDATA[<div class="passportslider">
+  <div class="content-card">
+    <div class="content-card-header">
+      <h3 class="content-card-title">{{c.data.imageTilesDetails.title}}</h3>
+    </div>
+    <div class="content-card-body">
+      <mmp-image-tiles image-tiles-details="c.data.imageTilesDetails"></mmp-image-tiles>
+    </div>
+    <div class="content-card-footer"></div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_angular_provider">
+    <sp_angular_provider action="INSERT_OR_UPDATE">
+        <name>mmpProgressTimeline</name>
+        <script><![CDATA[function mmpProgressTimeline(){
+	
+    var directive = {};
+    directive.restrict = 'E';
+    directive.scope = {
+      title: '@',
+      progressSteps: '='
+    }; 
+    directive.template= '<div class="row">'+
+'    <div class="col-sm-3">'+
+'        <h2 class="progress-country-title" ng-bind-html="title"></h2>'+
+'        </div>'+
+'        <div class="col-sm-9">'+
+'            <div class="new-progressbar">'+
+'                <div class="progress-line"></div>'+
+'                <div class="progress-line-current-progress" style="width: {{progressbar.currentProgress}}%;"></div>'+
+''+
+'                <span ng-repeat="stepDetails in progressbar.stepDetails" class="stepspan">'+
+'                    <div class="progress-step-name {{stepDetails.status}}-name" style="left: calc({{stepDetails.stepPlacement}}% + 10px);transform: translate(-50%);">{{stepDetails.stepName}}</div>'+
+'                    <div class="progress-steps {{stepDetails.status}}-step" style="left: {{stepDetails.stepPlacement}}%"></div>'+
+'                    <div class="progress-stepsline {{stepDetails.status}}-step" style="width: {{stepDetails.stepPlacement}}%"></div>'+
+'                </span>'+
+'            </div>'+
+'        </div>'+
+'    <div class="col-md-12">'+
+'        <div class="responsive_progress_bar">'+
+'            <div class="responsive-progress-line"></div>'+
+'            <div class="responsive-progress-line-current-progress" style="height: calc(3 * {{progressbar.currentProgress}}px);"></div>'+
+''+
+'            <span ng-repeat="stepDetails in progressbar.stepDetails" class="responsive-stepspan">'+
+'                <div class="responsive-progress-step-name {{stepDetails.status}}-name" style="top: calc(3 * {{stepDetails.stepPlacement}}px);">{{stepDetails.stepName}}</div>'+
+'                <div class="responsive-progress-steps {{stepDetails.status}}-step" style="top: calc(3 * {{stepDetails.stepPlacement}}px);"></div>'+
+'                <div class="responsive-progress-stepsline {{stepDetails.status}}-step" style="height: calc(3 * {{stepDetails.stepPlacement}}px)"></div>'+
+'            </span>'+
+''+
+'        </div>'+
+'    </div>'+
+'</div>';
+	
+
+    directive.link = function(scope){
+  
+      //Logical Space for Progress Bar (Converting Input into meaningful data which will be passed in HTML)
+      var progressArray = scope.progressSteps;
+      var numberofsteps = progressArray.length;
+      var overall_progress = 0;
+  
+      //Calculating Overall Progress of the Progress Bar
+      for (var i = 0; i < numberofsteps; i++) {
+        var currentStep = progressArray[i];   //current step we are on
+        var nextStep = progressArray[i +1]; //the next step in order
+  
+        if(currentStep.placementPercentage < 100){
+  
+          if((currentStep.percentComplete < 100) && (currentStep.percentComplete > 0)){
+  
+            var pro_diff = 0;
+  
+            if(nextStep.placementPercentage){
+  
+              pro_diff =  nextStep.placementPercentage - currentStep.placementPercentage;
+  
+            }
+  
+            var bet_percent = ((pro_diff * currentStep.percentComplete)/100);
+  
+            overall_progress = bet_percent + currentStep.placementPercentage;
+            break;
+          }
+        }
+      }
+  
+      //Assigning statuses to the steps (Completed, Current and Incomplete)
+      var temp_progress_array = [];
+      for (var i = 0; i < numberofsteps; i++){
+  
+        var currentStep = progressArray[i];//current step we are on
+        var preStep = progressArray[i -1];//the previous step in order
+  
+        var temp_object = {};
+        temp_object.stepName = currentStep.name;
+        temp_object.stepPlacement = currentStep.placementPercentage;
+  
+        if(currentStep.percentComplete == 100){
+          temp_object.status = 'completed';
+        }
+        if((currentStep.percentComplete < 100) && (currentStep.percentComplete > 0)){
+          temp_object.status = 'current';
+        }
+        if(currentStep.percentComplete == 0){
+  
+          if(preStep && preStep.percentComplete == 100){
+              temp_object.status = 'current';
+          }
+          else{
+              temp_object.status = 'incomplete';
+          }
+        }
+        temp_progress_array.push(temp_object);
+      }
+  
+      scope.progressbar = {};
+      scope.progressbar.currentProgress = overall_progress; //Total Progress
+      scope.progressbar.stepDetails = temp_progress_array;
+    }
+    return directive;
+}]]></script>
+        <sys_class_name>sp_angular_provider</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-09-11 13:47:13</sys_created_on>
+        <sys_id>780d6d861bf3330004b432a3cc4bcb96</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>mmpProgressTimeline</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sp_angular_provider_780d6d861bf3330004b432a3cc4bcb96</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-09-11 13:47:13</sys_updated_on>
+        <type>directive</type>
+    </sp_angular_provider>
+</record_update>

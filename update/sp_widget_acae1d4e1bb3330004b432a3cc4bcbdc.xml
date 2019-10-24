@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+
+  var c = this; //declare c internally 
+  c.data = {}; //setup our data object (To be used in later steps)
+
+  /************ Big Progress Bar Details Here *************/
+  c.data.progressBarDetails = {};
+  c.data.progressBarDetails.title = 'Progress to <strong>Holland</strong>';
+
+  // This is an array where we will insert the step details (Step Name, Step Placement and Step percentage to next step)
+  c.data.progressBarDetails.progressSteps = [
+    {name:'Preparing', placementPercentage:0, percentComplete:100},
+    {name:'Accept Position', placementPercentage:12, percentComplete:100},
+    {name:'Approve Package', placementPercentage:24, percentComplete:100},
+    {name:'Mobility Preparation', placementPercentage:40, percentComplete:50},
+    {name:'Departure', placementPercentage:84, percentComplete:0},
+    {name:'Welcome Home', placementPercentage:100, percentComplete:0},
+  ];
+  
+  /************  Task Details *************/
+
+  c.data.showMajorTask = true;  //Hide/Show Major Task Directive
+  c.data.showMultiTask = true;  //Hide/Show Multi Task Directive
+
+  if((c.data.showMajorTask) || (c.data.showMultiTask)){
+    c.data.showHorizontalLine = true;
+  }
+  else{
+    c.data.showHorizontalLine = false;
+  }
+  
+  /************ Major Task Details Here *************/
+
+  c.data.majorTaskDetails = {};
+  c.data.majorTaskDetails.title = 'Preparing your future assignment';
+  c.data.majorTaskDetails.short_description = 'We are currently preparing the details of your upcoming assignment';
+  
+  //Action button details
+  c.data.majorTaskDetails.actions = {name:'Review and Accept Assignment', clickAction:'', btnClass:'btn-primary'} ;
+  
+
+  /************ Multi Task Details Here *************/
+
+    c.data.multiTaskDetails = {};
+    c.data.multiTaskDetails.title = 'Tasks';
+
+    //Multiple Tasks Details here
+    c.data.multiTaskDetails.tasks = [
+        {
+            name: 'Expenses', 
+            icon:'fa fa-file-text-o',
+            PercentComplete:45,
+            listOfTasks : [ //This is the list of tasks with checkboxes.
+                {name: 'Moving expenses form',iconClass: 'fa fa-exclamation-circle', iconClassColor: 'red', Complete: false, taskUrl: 'http://google.com'},
+                {name: 'Moving expenses form',iconClass: '',Complete: true,},
+                {name: 'Moving expenses form',iconClass: 'fa fa-exclamation-circle', iconClassColor: '#516364', Complete: false,},
+                {name: 'Moving expenses form',iconClass: 'fa fa-exclamation-circle', iconClassColor: '#516364', Complete: false,},
+                {name: 'Moving expenses form',iconClass: 'fa fa-exclamation-circle', iconClassColor: '#516364', Complete: false,},
+                {name: 'Moving expenses form',iconClass: 'fa fa-exclamation-circle', iconClassColor: '#516364', Complete: false,},
+                {name: 'Moving expenses form',iconClass: 'fa fa-exclamation-circle', iconClassColor: '#516364', Complete: false,},
+            ],
+            contact:{ //This is contact, leaving it empty will hide Contact part.
+                name:'Contact Expenses', 
+                url:'http://example.com'
+            }
+        },
+        {
+            name: 'Taxes', 
+            icon:'fa fa-money', 
+            PercentComplete:100, 
+            listOfTasks : [
+                {name: 'Moving expenses form',iconClass: 'fa fa-exclamation-circle',Complete: false,},
+                {name: 'Moving expenses form',iconClass: '',Complete: false,},
+            ],
+            contact:{
+                name:'Contact Taxes', 
+                url:''
+            }
+        },
+        {
+            name: 'Social', 
+            icon:'fa fa-comments-o', 
+            PercentComplete:87,
+            listOfTasks : [
+                {name: 'Moving expenses form',iconClass: 'fa fa-exclamation-circle',Complete: false,},
+                {name: 'Moving expenses form',iconClass: '',Complete: true,},
+                {name: 'Moving expenses form',iconClass: '',Complete: true,},
+            ],
+            contact:{
+                name:'Contact Social', 
+                url:'http://example.com'
+            }
+        },
+        {
+            name: 'Benefits', 
+            icon:'fa fa-thumbs-up', 
+            PercentComplete:15,
+            listOfTasks : [
+                {name: 'Moving expenses form',iconClass: '',Complete: true,},
+                {name: 'Moving expenses form',iconClass: 'fa fa-exclamation-circle',Complete: false,},
+                {name: 'Moving expenses form',iconClass: '',Complete: false,},
+            ],
+            contact:{
+                name:'Contact Benefit', 
+                url:''
+            }
+        },
+        {
+            name: 'Contract', 
+            icon:'fa fa-pencil-square-o', 
+            PercentComplete:59, 
+            listOfTasks : [
+                {name: 'Moving expenses form',iconClass: 'fa fa-exclamation-circle',Complete: false,},
+                {name: 'Moving expenses form',iconClass: '',Complete: true,},
+            ],
+            contact:{
+                name:'Contact Contract', 
+                url:''
+            }
+        },
+        {
+            name: 'Immigration', 
+            icon:'fa fa-id-card-o', 
+            PercentComplete:42, 
+            listOfTasks : [
+                {name: 'Moving expenses form',iconClass: '',Complete: true,},
+                {name: 'Moving expenses form',iconClass: '',Complete: true,},
+                {name: 'Moving expenses form',iconClass: 'fa fa-exclamation-circle',Complete: false,},
+            ],
+            contact:{
+                name:'Contact Immigration', 
+                url:'http://example.com'
+            }
+        },
+    ];
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/******* Progress Bar Section *******/&#13;
+&#13;
+.progresstaskslists {&#13;
+	max-width: 95%;&#13;
+	margin: 0 auto 15px;&#13;
+	padding: 5px 0 20px;&#13;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);&#13;
+}&#13;
+&#13;
+section.progress-country {&#13;
+	padding: 25px 0 5px;&#13;
+}&#13;
+&#13;
+.progress-country-title {&#13;
+	font-size: 27px;&#13;
+	color: #424242;&#13;
+}&#13;
+&#13;
+&#13;
+/* Progress Bar */&#13;
+&#13;
+.new-progressbar {&#13;
+	position: relative;&#13;
+	margin: 35px 64px 45px 10px;&#13;
+}&#13;
+&#13;
+.progress-line {&#13;
+	height: 7px;&#13;
+	background-color: #A8A8A8;&#13;
+	margin-left: 2px;&#13;
+	margin-right: -2px;&#13;
+}&#13;
+&#13;
+.progress-line-current-progress {&#13;
+	height: 7px;&#13;
+	background-color: #34A7C7;&#13;
+	margin-left: 12px;&#13;
+	margin-right: -2px;&#13;
+	position: absolute;&#13;
+	top: 0;&#13;
+}&#13;
+&#13;
+.progress-steps {&#13;
+	position: absolute;&#13;
+	height: 20px;&#13;
+	width: 20px;&#13;
+	background-color: #A8A8A8;&#13;
+	border-radius: 50%;&#13;
+	top: -7px;&#13;
+}&#13;
+&#13;
+.progress-step-name {&#13;
+	position: absolute;&#13;
+	background-color: #EFEEF0;&#13;
+	padding: 1px 4px 2px;&#13;
+	font-size: 13px;&#13;
+	min-width: 72px;&#13;
+	text-align: center;&#13;
+	white-space: nowrap;&#13;
+}&#13;
+&#13;
+.new-progressbar .stepspan:nth-child(odd) .progress-step-name {&#13;
+	top: -42px;&#13;
+}&#13;
+&#13;
+.new-progressbar .stepspan:nth-child(even) .progress-step-name {&#13;
+	bottom: -42px;&#13;
+}&#13;
+&#13;
+.progress-step-name:after {&#13;
+	content: '';&#13;
+	position: absolute;&#13;
+	left: 50%;&#13;
+	width: 0;&#13;
+	height: 0;&#13;
+	border: 7px solid transparent;&#13;
+	border-bottom: 0;&#13;
+	margin-left: -7px;&#13;
+}&#13;
+&#13;
+.new-progressbar .stepspan:nth-child(odd) .progress-step-name:after {&#13;
+	margin-bottom: -7px;&#13;
+	bottom: 0;&#13;
+}&#13;
+&#13;
+.new-progressbar .stepspan:nth-child(even) .progress-step-name:after {&#13;
+	top: 0;&#13;
+	margin-top: -7px;&#13;
+	transform: rotate(180deg);&#13;
+}&#13;
+&#13;
+.completed-name {&#13;
+	background-color: #34C79D;&#13;
+	color: #fff;&#13;
+}&#13;
+&#13;
+.completed-name:after {&#13;
+	border-top-color: #34C79D;&#13;
+}&#13;
+&#13;
+.current-name {&#13;
+	background-color: #34A7C7;&#13;
+	color: #fff;&#13;
+}&#13;
+&#13;
+.current-name:after {&#13;
+	border-top-color: #34A7C7;&#13;
+}&#13;
+&#13;
+.incomplete-name {&#13;
+	background-color: #EFEEF0;&#13;
+	color: #424242;&#13;
+}&#13;
+&#13;
+.incomplete-name:after {&#13;
+	border-top-color: #EFEEF0;&#13;
+}&#13;
+&#13;
+.progress-steps.completed-step {&#13;
+	background-color: #34C79D;&#13;
+}&#13;
+&#13;
+.progress-stepsline.completed-step {&#13;
+    background-color: #34C79D;&#13;
+}&#13;
+&#13;
+.progress-steps.current-step {&#13;
+	background-color: #34A7C7;&#13;
+}&#13;
+&#13;
+.progress-stepsline {&#13;
+	height: 7px;&#13;
+	position: absolute;&#13;
+	top: 0px;&#13;
+	left: 1px;&#13;
+}&#13;
+&#13;
+.progress-stepsline.current-step {&#13;
+	background-color: #34C79D;&#13;
+	z-index: 8;&#13;
+}&#13;
+&#13;
+/* Code for Responsive Vertical Progress bar */&#13;
+.responsive_progress_bar {&#13;
+	height: 400px;&#13;
+	width: 300px;&#13;
+	display: none;&#13;
+}&#13;
+.responsive-progress-line {&#13;
+	width: 8px;&#13;
+	background-color: #A8A8A8;&#13;
+	height: 303px;&#13;
+	border-radius: 5px;&#13;
+}&#13;
+.responsive-progress-line-current-progress {&#13;
+	background-color: #34A7C7;&#13;
+	position: absolute;&#13;
+	width: 8px;&#13;
+	top: 1px;&#13;
+}&#13;
+.responsive-progress-step-name {&#13;
+	position: absolute;&#13;
+	left: 50px;&#13;
+	padding: 1px 5px;&#13;
+}&#13;
+&#13;
+.responsive-progress-step-name:after {&#13;
+	content: '';&#13;
+	position: absolute;&#13;
+	left: 0;&#13;
+	top: 50%;&#13;
+	width: 0;&#13;
+	height: 0;&#13;
+	border: 11px solid transparent;&#13;
+	border-right-color: #EFEEF0;&#13;
+	border-left: 0;&#13;
+	margin-top: -11px;&#13;
+	margin-left: -11px;&#13;
+}&#13;
+.responsive-progress-steps {&#13;
+	position: absolute;&#13;
+	height: 20px;&#13;
+	width: 20px;&#13;
+	background-color: #aaabaa;&#13;
+	border-radius: 50%;&#13;
+}&#13;
+.responsive-progress-steps {&#13;
+	position: absolute;&#13;
+	height: 22px;&#13;
+	width: 22px;&#13;
+	background-color: #aaabaa;&#13;
+	border-radius: 50%;&#13;
+	left: 8px;&#13;
+}&#13;
+.responsive-progress-steps.completed-step, .responsive-progress-stepsline.current-step {&#13;
+	background-color: #34C79D;&#13;
+}&#13;
+.responsive-progress-step-name.completed-name:after {&#13;
+	border-right-color: #34C79D;&#13;
+}&#13;
+.responsive-progress-steps.current-step{&#13;
+	background-color: #34A7C7;&#13;
+}&#13;
+.responsive-progress-step-name.current-name:after {&#13;
+	border-right-color: #34A7C7;&#13;
+}&#13;
+.responsive-progress-stepsline{&#13;
+	position: absolute;&#13;
+	width: 8px;&#13;
+	top: 1px;&#13;
+}&#13;
+.responsive-progress-stepsline.completed-step{&#13;
+	background-color: #34C79D;&#13;
+}&#13;
+&#13;
+@media(max-width:991px){&#13;
+    .progress-country-title{&#13;
+        margin-bottom: 50px;&#13;
+    }&#13;
+}&#13;
+@media(max-width:700px){&#13;
+    .progress-country-title{&#13;
+        margin: 0px 0 20px;&#13;
+    }&#13;
+    .new-progressbar {&#13;
+        display: none;&#13;
+    }&#13;
+    .responsive_progress_bar{&#13;
+        display: block;&#13;
+    }&#13;
+}&#13;
+&#13;
+/* Progress Bar Ends */&#13;
+&#13;
+&#13;
+/* horizontal Line between progress bar and Tasks */&#13;
+.progress-ctrl-hr{&#13;
+	border-color: #ccc;&#13;
+}&#13;
+@media(max-width:480px){&#13;
+    .progress-ctrl-hr{&#13;
+        margin-top: -30px;&#13;
+    }&#13;
+}&#13;
+&#13;
+&#13;
+/* Major Task Directive */&#13;
+.major-task-dir-div h3{&#13;
+	font-weight: bold;&#13;
+}&#13;
+&#13;
+/******** Task List *******/&#13;
+&#13;
+.task-list-wrapper {&#13;
+	display: flex;&#13;
+	flex-direction: row;&#13;
+}&#13;
+&#13;
+section.task-list {&#13;
+	padding: 15px 0 0;&#13;
+}&#13;
+&#13;
+.task-list-single {&#13;
+	width: 200px;&#13;
+	display: inline-flex;&#13;
+	text-align: left;&#13;
+	padding: 0 7px;&#13;
+	margin: 10px 0;&#13;
+}&#13;
+&#13;
+.task-list-wrapper .task-list-single {&#13;
+	border-right: 1px solid #aaa;&#13;
+}&#13;
+&#13;
+.task-card h3 {&#13;
+	margin-top: 0;&#13;
+	font-size: 18px;&#13;
+	font-family: 'Montserrat', sans-serif;&#13;
+}&#13;
+&#13;
+.task-card td i {&#13;
+	font-size: 22px;&#13;
+}&#13;
+&#13;
+.small-progress-bar {&#13;
+	width: calc(100% - 15px);&#13;
+	border: 1px solid #ddd;&#13;
+	margin-left: 5px;&#13;
+}&#13;
+&#13;
+.current-progress {&#13;
+	height: 10px;&#13;
+	background-color: #34A7C7;&#13;
+}&#13;
+&#13;
+.complete-progress {&#13;
+	height: 10px;&#13;
+	background-color: #34C79D;&#13;
+}&#13;
+&#13;
+.task-card {&#13;
+	color: #777;&#13;
+	position: relative;&#13;
+    padding-bottom: 24px;&#13;
+}&#13;
+&#13;
+.task-card table{&#13;
+	width: 100%;&#13;
+}&#13;
+&#13;
+.task-card table tr td:first-child{&#13;
+	width: 30px;&#13;
+}&#13;
+&#13;
+.task-checkboxes {&#13;
+	padding: 10px 0 10px 10px;&#13;
+	overflow: hidden;&#13;
+}&#13;
+&#13;
+.task-list-wrapper .task-list-single:last-child {&#13;
+    border-right: 0;&#13;
+}&#13;
+&#13;
+.task-heading{&#13;
+	font-weight: 600;&#13;
+	text-align: center;&#13;
+}&#13;
+&#13;
+.task-checkboxes p {&#13;
+    margin-bottom: 0;&#13;
+}&#13;
+&#13;
+.custom-check{&#13;
+	display: block;&#13;
+	background-position: 0 2px;&#13;
+    background-repeat: no-repeat;&#13;
+    background-size: 16px;&#13;
+	padding-left: 20px;&#13;
+	font-size: 12px;&#13;
+    line-height: 22px;&#13;
+	color: #777;&#13;
+	position: relative;&#13;
+}&#13;
+.custom-check:hover, .custom-check:focus{&#13;
+	color: #777;&#13;
+	text-decoration: none;&#13;
+}&#13;
+a.custom-check.completeCheck{&#13;
+	cursor: pointer;&#13;
+}&#13;
+a.custom-check i {&#13;
+    position: absolute;&#13;
+    left: 0;&#13;
+    top: 2px;&#13;
+    font-size: 18px;&#13;
+}&#13;
+a.custom-check.completeCheck i{&#13;
+	color: #34C79D;&#13;
+}&#13;
+&#13;
+.contact-task {&#13;
+	font-family: 'Montserrat';&#13;
+	font-size: 11px;&#13;
+	padding: 10px 0 0;&#13;
+	min-height: 28px;&#13;
+	position: absolute;&#13;
+    bottom: 0;&#13;
+}&#13;
+&#13;
+.contact-task a {&#13;
+	color: #666;&#13;
+}&#13;
+&#13;
+.contact-task a i {&#13;
+	font-size: 150%;&#13;
+}&#13;
+@media(max-width:1024px){&#13;
+	.task-list-wrapper{&#13;
+		display: block;&#13;
+	}&#13;
+	.task-list-wrapper .task-list-single {&#13;
+        box-shadow: 2px 3px 12px 0 #aaa;&#13;
+        padding: 10px 7px;&#13;
+        margin: 10px;&#13;
+        border:none;&#13;
+    }&#13;
+}&#13;
+@media(max-width:480px){&#13;
+    .task-list-single{&#13;
+        width: calc(100% - 20px);&#13;
+        max-width: 360px;&#13;
+    }&#13;
+    .task-card{&#13;
+        width: 100%;&#13;
+    }&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>progressController</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-09-11 12:46:48</sys_created_on>
+        <sys_id>acae1d4e1bb3330004b432a3cc4bcbdc</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>progressController</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sp_widget_acae1d4e1bb3330004b432a3cc4bcbdc</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-09-13 12:47:23</sys_updated_on>
+        <template><![CDATA[<div class="progresstaskslists">
+  <section class="progress-country">
+    <div class="container-fluid">
+
+      <!-- Progress Bar Directive -->
+      <mmp-progress-timeline title="{{c.data.progressBarDetails.title}}" progress-steps="c.data.progressBarDetails.progressSteps"></mmp-progress-timeline>
+
+      <hr ng-if="c.data.showHorizontalLine" class="progress-ctrl-hr">
+      
+      <!-- Major Task Directive -->
+      <mmp-major-task ng-if="c.data.showMajorTask" title="{{c.data.majorTaskDetails.title}}" short-description="{{c.data.majorTaskDetails.short_description}}" action="c.data.majorTaskDetails.actions"></mmp-major-task>
+
+      <!-- Multi Task Directive -->
+      <mmp-multi-task ng-if="c.data.showMultiTask" title="{{c.data.multiTaskDetails.title}}" multi-task-details="c.data.multiTaskDetails"></mmp-multi-task>
+
+    </div>
+  </section>
+</div>]]></template>
+    </sp_widget>
+</record_update>
